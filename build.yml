@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    some-label: pod
+    app: jenkins
 spec:
   containers:
     - name: maven
@@ -10,9 +10,6 @@ spec:
       command:
         - cat
       tty: true
-      volumeMounts:
-        - name: m2
-          mountPath: /root/.m2
     - name: docker
       image: docker:19.03
       command:
@@ -31,6 +28,3 @@ spec:
     - name: dockersock
       hostPath:
         path: /var/run/docker.sock
-    - name: m2
-      hostPath:
-        path: /root/.m2
