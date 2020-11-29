@@ -10,11 +10,17 @@ spec:
       command:
         - cat
       tty: true
+      resources:
+        requests:
+            cpu: "100m"      
     - name: docker
       image: docker:19.03
       command:
         - cat
       tty: true
+      resources:
+        requests:
+            cpu: "100m"       
       privileged: true
       volumeMounts:
         - name: dockersock
@@ -24,6 +30,9 @@ spec:
       command:
         - cat
       tty: true
+      resources:
+        requests:
+            cpu: "100m"       
   volumes:
     - name: dockersock
       hostPath:
