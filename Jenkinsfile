@@ -20,7 +20,10 @@ pipeline {
         }
         stage('Docker Build') {
             agent {
-                docker { image 'docker' args '/var/run/docker.sock'}
+                docker { 
+                    image 'docker' 
+                    args '/var/run/docker.sock'
+                }
             }
             steps {
                 sh 'docker --version'
@@ -28,7 +31,10 @@ pipeline {
         }
         stage('Docker Publish') {
             agent {
-                docker { image 'docker' args '/var/run/docker.sock'}
+                docker { 
+                    image 'docker' 
+                    args '/var/run/docker.sock'
+                }
             }
             steps {
                 sh 'docker --version'
