@@ -4,7 +4,6 @@ pipeline {
         VERSION = readMavenPom().getVersion()
         REGISTRY = 'janpreet/maven-hello-world'
         REGISTRY_CREDENTIAL = 'dockerHub-user'
-        KUBECONFIG = '/path/to/.kube/config'
     }    
     agent {
         node { label 'all-in-one' }
@@ -27,7 +26,10 @@ pipeline {
         }
         stage('Kubernetes Deploy') {
              steps {
+                withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
+                {
                     sh "helm install ${NAME} ./helm"
+                }
             }
         }                
     }
