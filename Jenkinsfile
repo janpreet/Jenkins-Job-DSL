@@ -6,7 +6,9 @@ pipeline {
         REGISTRY_CREDENTIAL = 'dockerHub-user'
         KUBECONFIG = '/path/to/.kube/config'
     }    
-    agent all-in-one
+    agent {
+        node { label 'all-in-one' }
+    }
     stages {
         stage('Build') {
             steps {
