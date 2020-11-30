@@ -6,13 +6,11 @@ pipeline {
         REGISTRY_CREDENTIAL = 'dockerHub-user'
         KUBECONFIG = '/path/to/.kube/config'
     }    
-    agent{
-        label "deploy"
-    }
+    agent none
     stages {
         stage('Build') {
             agent {
-                docker { image 'maven:3-alpine' }
+                label 'maven'
             }
             steps {
                 sh 'mvn --version'
@@ -20,9 +18,7 @@ pipeline {
         }
         stage('Docker Build') {
             agent {
-                docker { 
-                    image 'alpine:latest' 
-                }
+                label 'maven'                
             }
             steps {
                 sh 'echo Building...'
@@ -30,9 +26,7 @@ pipeline {
         }
         stage('Docker Publish') {
             agent {
-                docker { 
-                    image 'alpine:latest' 
-                }
+                label 'maven'
             }
             steps {
                 sh 'echo Publishing...'
@@ -40,10 +34,10 @@ pipeline {
         }
         stage('Kubernetes Deploy') {
             agent {
-                docker { image 'alpine/helm' }
+                label 'helm'
             }
             steps {
-                sh 'helm --version'
+                sh 'helm version'
             }
         }                
     }
