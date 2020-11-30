@@ -6,45 +6,40 @@ pipeline {
         REGISTRY_CREDENTIAL = 'dockerHub-user'
         KUBECONFIG = '/path/to/.kube/config'
     }    
-    agent {
-        kubernetes {
-            defaultContainer 'jnlp'
-            yamlFile 'build.yml'
-        }
+    agent{
+        label "deploy"
     }
     stages {
         stage('Build') {
+            agent {
+                docker { image 'maven:3-alpine' }
+            }
             steps {
-                container('maven') {
-                    sh 'mvn package'
-                }
+                sh 'mvn --version'
             }
         }
         stage('Docker Build') {
+            agent {
+                docker { image 'docker' args '/var/run/docker.sock:/var/run/docker.sock'}
+            }
             steps {
-                container('docker') {
-                    sh "docker build -t ${REGISTRY}:${VERSION} ."
-                }
+                sh 'docker --version'
             }
         }
         stage('Docker Publish') {
-             steps {
-                container('docker') {
-                    withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
-                        sh "docker push ${REGISTRY}:${VERSION}"
-                    }
-                }
+            agent {
+                docker { image 'docker' args '/var/run/docker.sock:/var/run/docker.sock'}
+            }
+            steps {
+                sh 'docker --version'
             }
         }
         stage('Kubernetes Deploy') {
-            steps {
-                container('helm') {
-                  withCredentials([file(credentialsId: 'secret-config', variable: 'KUBECONFIG')]) {
-                    sh 'use $KUBECONFIG'
-                    sh "helm upgrade --install --force --set name=${NAME} ${NAME} ./helm"
-                  }
-                }
+            agent {
+                docker { image 'alpine/helm' }
             }
-        }
+            steps {
+                sh 'helm --version'
+            }
+        }                
     }
-}
