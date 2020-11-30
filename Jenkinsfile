@@ -26,7 +26,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker --version'
+                sh 'echo Building...'
             }
         }
         stage('Docker Publish') {
@@ -37,7 +37,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker --version'
+                sh 'echo Publishing...'
             }
         }
         stage('Kubernetes Deploy') {
