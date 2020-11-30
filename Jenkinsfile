@@ -27,10 +27,7 @@ pipeline {
         }
         stage('Kubernetes Deploy') {
              steps {
-                withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
-                {
                     sh "helm install ${NAME} ./helm"
-                }
             }
         }                
     }
