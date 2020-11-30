@@ -6,29 +6,25 @@ pipeline {
         REGISTRY_CREDENTIAL = 'dockerHub-user'
         KUBECONFIG = '/path/to/.kube/config'
     }    
-    agent any
+    agent all-in-one
     stages {
         stage('Build') {
-            agent { label 'maven' }
             steps {
                 sh 'mvn --version'
             }
         }
         stage('Docker Build') {
-            agent { label 'maven' }
             steps {
                 sh 'echo Building...'
             }
         }
         stage('Docker Publish') {
-            agent { label 'maven' }
-            steps {
+             steps {
                 sh 'echo Publishing...'
             }
         }
         stage('Kubernetes Deploy') {
-            agent { label 'maven' }
-            steps {
+             steps {
                 sh 'helm version'
             }
         }                
