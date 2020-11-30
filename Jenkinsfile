@@ -21,7 +21,7 @@ pipeline {
         stage('Docker Build') {
             agent {
                 docker { 
-                    image 'docker' 
+                    image 'docker:stable-dind-rootless' 
                     args '/var/run/docker.sock'
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
         stage('Docker Publish') {
             agent {
                 docker { 
-                    image 'docker' 
+                    image 'docker:stable-dind-rootless' 
                     args '/var/run/docker.sock'
                 }
             }
