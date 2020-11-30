@@ -21,7 +21,7 @@ pipeline {
         stage('Docker Build') {
             agent {
                 docker { 
-                    image 'docker:stable-dind-rootless' 
+                    image 'alpine:latest' 
                 }
             }
             steps {
@@ -31,7 +31,7 @@ pipeline {
         stage('Docker Publish') {
             agent {
                 docker { 
-                    image 'docker:stable-dind-rootless' 
+                    image 'alpine:latest' 
                 }
             }
             steps {
