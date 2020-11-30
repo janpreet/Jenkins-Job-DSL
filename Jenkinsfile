@@ -22,7 +22,6 @@ pipeline {
             agent {
                 docker { 
                     image 'docker:stable-dind-rootless' 
-                    args '/var/run/docker.sock'
                 }
             }
             steps {
@@ -33,7 +32,6 @@ pipeline {
             agent {
                 docker { 
                     image 'docker:stable-dind-rootless' 
-                    args '/var/run/docker.sock'
                 }
             }
             steps {
