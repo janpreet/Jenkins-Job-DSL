@@ -6,7 +6,7 @@ pipeline {
         REGISTRY_CREDENTIAL = 'dockerHub-user'
         KUBECONFIG = '/path/to/.kube/config'
     }    
-    agent none
+    agent any
     stages {
         stage('Build') {
             agent { label 'maven' }
