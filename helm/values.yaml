@@ -52,7 +52,7 @@ readinessProbe:
   enabled: false
   initialDelaySeconds: 30
   path:
-  tcpPort: 8090 
+  tcpPort: 8080 
 
 ## If using an HTTPS-terminating load-balancer, the probes may need to behave
 ## like the balancer to prevent HTTP 302 responses. According to the Kubernetes
@@ -70,8 +70,8 @@ readinessProbeHeaders: {}
 
 service:
   type: ClusterIP
-  port: 8090
-  targetPort: 8090
+  port: 8080
+  targetPort: 8080
 
 ingress:
   enabled: false

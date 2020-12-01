@@ -7,5 +7,5 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 ARG JAR_FILE=/usr/src/app/target/maven-hello-world.jar
 WORKDIR /opt/app
 COPY --from=build ${JAR_FILE} app.jar  
-EXPOSE 8090  
+EXPOSE 8080  
 ENTRYPOINT ["java","-jar","app.jar"]  
