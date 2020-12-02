@@ -5,16 +5,22 @@ pipeline {
         REGISTRY = 'janpreet/maven-hello-world'
         REGISTRY_CREDENTIAL = 'dockerHub-user'
     }    
-    agent {
-        node { label 'all-in-one' }
-    }
+    agent any
     stages {
         stage('Build') {
+            agent {
+                docker {
+                    image 'node:12.16.1'
+                }
+            }            
             steps {
                 sh 'mvn --version'
             }
         }
         stage('Docker Build') {
+            agent {
+                docker { image 'node:14-alpine' }
+            }            
             steps {
                 sh 'echo Building...'
             }
@@ -23,14 +29,6 @@ pipeline {
              steps {
                 sh 'echo Publishing...'
             }
-        }
-        stage('Kubernetes Deploy') {
-             steps {
-                withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
-                {
-                    sh "helm install ${NAME} ./helm"
-                }
-            }
-        }                
+        }            
     }
 }
