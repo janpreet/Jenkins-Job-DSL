@@ -1,7 +1,6 @@
 pipeline {
     environment {
         NAME = "maven-hello-world"      
-        VERSION = readMavenPom().getVersion()
         REGISTRY = 'janpreet/maven-hello-world'
         REGISTRY_CREDENTIAL = 'dockerHub-user'
     }    
