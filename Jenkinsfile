@@ -4,7 +4,9 @@ pipeline {
         REGISTRY = 'janpreet/maven-hello-world'
         REGISTRY_CREDENTIAL = 'dockerHub-user'
     }    
-    agent any
+    agent {
+        node { label 'all-in-one' }
+    }
     stages {
         stage('Build') {
             agent {
