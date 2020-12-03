@@ -4,7 +4,7 @@ pipeline {
         VERSION = readMavenPom().getVersion()
         REGISTRY = 'janpreet/maven-hello-world'
         REGISTRY_CREDENTIAL = 'dockerHub-user'
-        KUBECONFIG = '/var/jenkins_home/kubeconfig'
+        KUBECONFIG = $KUBECONFIG
     }    
     agent {
         node { label 'all-in-one' }
