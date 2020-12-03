@@ -9,11 +9,11 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:12.16.1'
+                    image 'alpine/helm'
                 }
             }            
             steps {
-                sh 'mvn --version'
+                sh 'helm version'
             }
         }
         stage('Docker Build') {
