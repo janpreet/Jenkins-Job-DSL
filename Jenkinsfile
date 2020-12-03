@@ -1,18 +1,18 @@
 pipeline {
     environment {
-        NAME = "maven-hello-world"      
-        REGISTRY = 'janpreet/maven-hello-world'
-        REGISTRY_CREDENTIAL = 'dockerHub-user'
+        KUBECONFIG = '$KUBECONFIG'        
     }    
     agent any
     stages {
-        stage('Docker Build') {
+        stage('Kubectl Test') {
             agent {
-                docker { image 'node:14-alpine' }
+                docker { image 'bitnami/kubectl:1.19' }
             }            
             steps {
-                sh 'echo Building...'
-                sh 'node -v'
+                withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
+                {
+                    sh "kubectl get nodes"
+                }
             }
         }
         stage('Docker Publish') {
