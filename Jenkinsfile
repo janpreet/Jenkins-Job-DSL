@@ -6,17 +6,6 @@ pipeline {
     }    
     agent any
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'alpine/helm'
-                    args '-it --entrypoint=/bin/bash'                       
-                }
-            }            
-            steps {
-                sh 'helm version'
-            }
-        }
         stage('Docker Build') {
             agent {
                 docker { image 'node:14-alpine' }
