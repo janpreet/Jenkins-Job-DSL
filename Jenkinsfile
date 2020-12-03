@@ -10,6 +10,7 @@ pipeline {
             agent {
                 docker {
                     image 'alpine/helm'
+                    args '-it --entrypoint=/bin/bash'                       
                 }
             }            
             steps {
