@@ -12,6 +12,7 @@ pipeline {
             }            
             steps {
                 sh 'echo Building...'
+                sh 'node -v'
             }
         }
         stage('Docker Publish') {
