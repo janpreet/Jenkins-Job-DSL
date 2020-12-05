@@ -11,7 +11,7 @@ pipeline {
                 withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
                 {
                     sh "helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/"
-                    sh "helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard"
+                    sh "helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --namespace kubernetes-dashboard --create-namespace"
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 {                 
                     sh "kubectl apply -f service-account.yml"
                     sh "kubectl apply -f role-binding.yml"
-                    sh "kubectl -n kubernetes-dashboard describe secret \$(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print \$1}')"
+                    sh "kubectl -n default describe secret \$(kubectl -n default get secret | grep admin-user | awk '{print \$1}')"
                 }
             }
         }            
