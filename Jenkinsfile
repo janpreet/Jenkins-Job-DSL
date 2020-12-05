@@ -2,7 +2,9 @@ pipeline {
     environment {
         KUBECONFIG = '$KUBECONFIG'        
     }    
-    agent any
+    agent {
+        node { label 'all-in-one' }
+    }
     stages {
         stage('Deploy Kubernetes Dashboard') {
             steps {
