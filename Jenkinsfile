@@ -17,7 +17,7 @@ pipeline {
              steps {
                 sh "kubectl apply -f service-account.yml"
                 sh "kubectl apply -f role-binding.yml"
-                sh "kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')"
+                sh "kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print \$1}')"
             }
         }            
     }
