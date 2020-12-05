@@ -2,7 +2,7 @@ pipeline {
     environment {
         KUBECONFIG = '$KUBECONFIG'        
     }    
-    agent any
+    agent none
     stages {
         stage('Kubectl Test') {
             agent {
