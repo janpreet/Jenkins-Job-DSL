@@ -29,7 +29,7 @@ pipeline {
              steps {
                 withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
                 {
-                    sh "helm install ${NAME} ./helm"
+                    sh "helm upgrade --install --force ${NAME} ./helm"
                 }
             }
         }                
