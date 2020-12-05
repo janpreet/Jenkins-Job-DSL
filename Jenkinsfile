@@ -17,9 +17,12 @@ pipeline {
         }
         stage('Add sample admin') {
              steps {
-                sh "kubectl apply -f service-account.yml"
-                sh "kubectl apply -f role-binding.yml"
-                sh "kubectl -n kubernetes-dashboard describe secret \$(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print \$1}')"
+                withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
+                {                 
+                    sh "kubectl apply -f service-account.yml"
+                    sh "kubectl apply -f role-binding.yml"
+                    sh "kubectl -n kubernetes-dashboard describe secret \$(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print \$1}')"
+                }
             }
         }            
     }
