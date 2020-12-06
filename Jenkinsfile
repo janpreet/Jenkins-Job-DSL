@@ -22,7 +22,7 @@ pipeline {
                 {                 
                     sh "kubectl apply -f service-account.yml"
                     sh "kubectl apply -f role-binding.yml"
-                    sh "kubectl -n default describe secret \$(kubectl -n default get secret | grep admin-user | awk '{print \$1}')"
+                    //sh "kubectl -n default describe secret \$(kubectl -n default get secret | grep admin-user | awk '{print \$1}')"
                 }
             }
         }            
