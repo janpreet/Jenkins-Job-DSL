@@ -29,6 +29,7 @@ pipeline {
              steps {
                 withCredentials([file(credentialsId: "kubeconfig", variable:"kubeconfig")])
                 {
+                    sh "helm repo update"
                     sh "helm install ${NAME} janpreet/maven-hello-world"
                 }
             }
