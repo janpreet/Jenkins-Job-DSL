@@ -5,46 +5,10 @@ image:
   pullPolicy: IfNotPresent
   tag: ""
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  create: true
-   annotations: {}
-  name: ""
-
-podAnnotations: {}
-
-podSecurityContext: {}
-
-securityContext: {}
-
 service:
   type: LoadBalancer
   port: 8080
   targetPort: 8088
-ingress:
-  enabled: false
-  annotations: {}
-  hosts:
-    - host: chart-example.local
-      paths: []
-  tls: []
-
-resources: {}
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
 
 livenessProbe:
   enabled: false
