@@ -2,8 +2,8 @@ replicaCount: 1
 
 image:
   repository: janpreet/simple-python-api
-  pullPolicy: IfNotPresent
-  tag: ""
+  pullPolicy: Always
+  tag: "latest"
 
 service:
   type: LoadBalancer
